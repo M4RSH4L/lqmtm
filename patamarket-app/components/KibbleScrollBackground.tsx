@@ -94,7 +94,7 @@ export default function KibbleScrollBackground() {
     <div
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: -1 }}
+      style={{ zIndex: 0 }}
     >
       <div className="absolute inset-0 bg-amber-50/60" />
       {particles.map((p) => (
