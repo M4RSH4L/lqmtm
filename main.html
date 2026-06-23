@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Caregiver's Table - PataMarket</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#747685",
+                        "tertiary": "#800027",
+                        "secondary-fixed-dim": "#f6bf00",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-container": "#6c5200",
+                        "tertiary-fixed-dim": "#ffb2b9",
+                        "tertiary-container": "#a7143a",
+                        "on-secondary-fixed-variant": "#5a4400",
+                        "on-primary-fixed-variant": "#003ab3",
+                        "on-secondary-fixed": "#251a00",
+                        "deal-yellow": "#FFC60A",
+                        "text-dark": "#121212",
+                        "surface-bright": "#f9f9f9",
+                        "outline-variant": "#c4c5d6",
+                        "on-primary-fixed": "#001550",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary": "#00329e",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#dce1ff",
+                        "surface": "#f9f9f9",
+                        "tertiary-fixed": "#ffdadb",
+                        "chewy-blue": "#1C49C4",
+                        "primary-container": "#1c49c4",
+                        "secondary": "#765a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#bbc7ff",
+                        "on-tertiary-fixed": "#40000f",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#434654",
+                        "error": "#ba1a1a",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdf96",
+                        "background": "#f9f9f9",
+                        "on-tertiary-container": "#ffb7bd",
+                        "secondary-container": "#fdc404",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "inverse-on-surface": "#f1f1f1",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-container": "#eeeeee",
+                        "success-green": "#D4FDAA",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-tint": "#2b54ce",
+                        "text-muted": "#666666",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#91002d",
+                        "alert-red": "#BD2848",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "gutter-desktop": "24px",
+                        "gutter-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "sans": ["Hanken Grotesk", "sans-serif"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            user-select: none;
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            gap: 1.5rem;
+            min-width: 100%;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .animate-marquee-right {
+                animation: marquee-right 40s linear infinite;
+            }
+
+            .animate-marquee-left {
+                animation: marquee-left 40s linear infinite;
+            }
+
+            .marquee-container:hover .animate-marquee-right,
+            .marquee-container:hover .animate-marquee-left {
+                animation-play-state: paused;
+            }
+        }
+
+        @keyframes marquee-right {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes marquee-left {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-sans text-on-surface">
+    <!-- BEGIN: TopPromoBar -->
+    <div class="w-full bg-deal-yellow py-2 text-center text-sm font-bold text-on-secondary-fixed"
+        data-purpose="announcement-bar">
+        Free $20 eGift card with your first $49+ order
+    </div>
+    <!-- END: TopPromoBar -->
+    <!-- BEGIN: HeroBanner -->
+    <section class="max-w-7xl mx-auto px-4 mt-4" data-purpose="hero-section">
+        <div class="relative rounded-xl overflow-hidden bg-primary h-[300px] md:h-[400px]">
+            <img alt="Hill's Prescription Diet Promotion" class="w-full h-full object-cover object-top"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaYvuzBXZVDfVAN45Q7wQ3s4xSJHeTjTRm1RabfZApLCU-baHCxK2_VhsueKtrud9t5LmW3RQk-Qp3rov6A-ycXHuEhUb7lF4X0HdCu7Ogxr4um4qFS43I_aR0WijyJa921cbHz0gf9tcRx7IIJPgRcrsZ1M5nnuYlCEBeiptNEzaIvvU00AGgD8FKyA7kNgQxqD707XYrq0-lgYlo1jnj4WrZ0f4kiFx0dhESWFP4iD8fQpgTuJHqPz2wRiwYH3hDc3EfmxCcaFj1">
+        </div>
+    </section>
+    <!-- END: HeroBanner -->
+    <!-- BEGIN: LoginAutoshipSection -->
+    <section class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-4"
+        data-purpose="user-dashboard-teaser">
+        <!-- Login Box -->
+        <div
+            class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between shadow-sm border border-outline-variant">
+            <div class="flex items-center gap-4">
+                <span class="text-xl font-bold font-headline-md">Hey, friend!</span>
+                <button
+                    class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold text-sm hover:opacity-90 transition">Sign
+                    in</button>
+            </div>
+        </div>
+        <!-- Autoship Box 1 -->
+        <div
+            class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4 shadow-sm">
+            <div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-full">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-xs font-bold">Save 35% on first order</p>
+                <a class="text-primary text-xs underline font-medium" href="#">Set up an Autoship</a>
+            </div>
+        </div>
+        <!-- Autoship Box 2 -->
+        <div
+            class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4 shadow-sm">
+            <div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-full">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-xs font-bold">Save 50% on first Pharmacy order</p>
+                <a class="text-primary text-xs underline font-medium" href="#">Set up a prescription Autoship</a>
+            </div>
+        </div>
+    </section>
+    <!-- END: LoginAutoshipSection -->
+    <!-- BEGIN: PetCategoryGrid -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 font-headline-lg mb-8">Who are you shopping for today?</h2>
+        <div class="flex flex-wrap justify-center md:gap-12 text-center mt-8 max-w-[85%] mx-auto gap-16">
+            <div class="group cursor-pointer flex flex-col items-center w-24 md:w-32">
+                <div
+                    class="aspect-square rounded-full bg-surface-container-lowest mb-2 overflow-hidden border-2 border-transparent group-hover:border-primary transition shadow-sm">
+                    <img alt="Dog" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAD8Clt-Lz_slu0Rsd2VYB7S1OEXkeCOniZVZVxgYgxFdVs-niuX7XMkQVm5bSqPIzVoPhMkOVfnUU5BpVnB-cB4U0IgvDZ_2ZeLrx-4S0gXtRiwy1zIlcpkvsPgnikBqqRIidvWb07G7DM-zMCU8iTIev7n_uxy0rJ58x5E3ERWjyGuMOWt7X5cAEp-z_T8y7YjERVuv1NLpfGW4Dv8NAscZfs_UNTTHpfywOZd7mRDQt2mJsvYKaRPO4XQSwU9y-TPJ_eoNHqFd7">
+                </div>
+                <p class="text-sm font-bold">Dog</p>
+            </div>
+            <div class="group cursor-pointer flex flex-col items-center w-24 md:w-32">
+                <div
+                    class="aspect-square rounded-full bg-surface-container-lowest mb-2 overflow-hidden border-2 border-transparent group-hover:border-primary transition shadow-sm">
+                    <img alt="Cat" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuApWXe3CE6MPYC_LmxYf06q3jIklVN7YdTKWjXoK1937gFXy3khlWAvZmH7ek0jEOuQE-YS93XQNxejiSDqGYwHwEh4gxjpmlBsGzcp-Bo_CVx02J8Xjfx9EpWq_aJloVIc_OKZS5KJqO0eZRj4PBaH7cVnXoBjTDrblvAMea2h3j2T1Sp1n3ZE-w3nA8Lb0r44huenGXB9--oefIas9I9eUcwEV_11DG5SSLFeyNEW8JkjJJOznCJwftYMnR5ZmdZ6WNVOUc_8bzO8">
+                </div>
+                <p class="text-sm font-bold">Cat</p>
+            </div>
+            <div class="group cursor-pointer flex flex-col items-center w-24 md:w-32">
+                <div
+                    class="aspect-square rounded-full bg-surface-container-lowest mb-2 overflow-hidden border-2 border-transparent group-hover:border-primary transition shadow-sm">
+                    <img alt="Pet Parent" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGoZQhQFZ0ylG22jFhVwkRObq0ceuVl2OxXIAL_f-0ZAt8Plz6yu3l0pgMTvPK3EZ6MyjU5s1ERmMdYT92otpMZXpAwwiCPltnPnYWkSs7xeTc18uQ3qwz4umDN1f4GO4DDw1i5UaWk4ZdkrExDRNgpPnMLEuPbYLTHS_v1AxSJ4K_grNzw95ZZNsgWAcWymxJWb8N3oJM8E7wR_p0CrzPZPKLyydO--OVJv6obeCgQ4Nk1Ho0T5wxfV9sfQZyN0S4xuj_USN9pco4">
+                </div>
+                <p class="text-sm font-bold">Pet Parent</p>
+            </div>
+            <div class="group cursor-pointer flex flex-col items-center w-24 md:w-32">
+                <div
+                    class="aspect-square rounded-full bg-surface-container-lowest mb-2 overflow-hidden border-2 border-transparent group-hover:border-primary transition shadow-sm">
+                    <img alt="Horse" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl0BB3bWDunFVC3KYYgm9C79N0JBpfy-dTmBmlwlKVnv1AUnl7KF8lEybJgwAct4kwNks0q2Xg4XTGMKniu82T--EMa1KCyc3vLaHGfuVNaDyik4WozU5o3NJRqPsRjszaBa3g4MPn_rtLXEABo3dWGKdP238CsVVRXVVdc0Q60HPMvt69SBVCCfRQdBJYrLpL43F9P2hYzlny-ayrWIjRlYUzAQca-1KFixP7aYtpkClP-8JoytG2z6GkXiLENTZ4nrzhmLvzjjye">
+                </div>
+                <p class="text-sm font-bold">Horse</p>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- END: PetCategoryGrid -->
+    <!-- BEGIN: ChewyPlusBanner -->
+    <section class="max-w-7xl mx-auto px-4 py-4">
+        <div
+            class="bg-surface-container-lowest rounded-xl p-6 flex flex-col md:flex-row items-center justify-between border border-outline-variant shadow-sm">
+            <div class="flex items-center gap-6">
+                <img alt="Chewy Plus Logo" class="h-12"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Wgda5ZvxDHgHUJQL8k5NYB3nklHSnmHi3cZMgY6KfUtEhTfuOaCAPrAbrGLGWxCIwxB1WsAysavZx8G_lWU8kEtnFCmu7LJG1DcAuGL1rd1zZGK6FuIkRX_6eFip_CMWxI4J2GHC0GJzqQ9nBRjc7ey2SlPnGJaHp3xliSJJl8BmVJV_bd7eVNSSx89s4qnc9xeVBHQ0opJksLYn4Kt7Ni6wCLZWpglSgvFH1bAHVakSIFm7cO52NJlLni5VNPJqfaTZ2jVuLGYB">
+                <div>
+                    <h3 class="text-2xl font-black text-primary font-headline-md">Free shipping and 5% rewards</h3>
+                    <p class="text-text-muted font-medium">Save &amp; earn on everything.</p>
+                </div>
+            </div>
+            <button
+                class="mt-4 md:mt-0 bg-primary text-on-primary px-8 py-3 rounded-full font-bold shadow-md hover:shadow-lg transition">Start
+                free trial</button>
+        </div>
+    </section>
+    <!-- END: ChewyPlusBanner -->
+    <!-- BEGIN: BlogSection (Modified for Fixed Left Card and Scrolling Products) -->
+    <section class="max-w-7xl mx-auto px-4 py-8 overflow-hidden">
+        <div class="flex flex-col md:flex-row gap-6 items-stretch">
+            <!-- Fixed Intro Card -->
+            <div
+                class="bg-tertiary-container p-6 rounded-xl md:w-1/4 border border-outline-variant flex-shrink-0 z-10 shadow-lg">
+                <h3 class="text-2xl font-bold mb-2 font-headline-md text-on-tertiary">Gear up for the 4th</h3>
+                <p class="text-sm text-on-tertiary-container mb-4 font-medium">Celebrate with patriotic picks for your
+                    bestie, from apparel to toys, collars and more.</p>
+                <a class="text-on-tertiary font-bold text-sm flex items-center gap-1 hover:underline" href="#">Shop all
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg></a>
+            </div>
+            <!-- Scrolling Product Section (Left scroll) -->
+            <div class="md:w-3/4 marquee-container" id="product-marquee">
+                <div class="marquee-content animate-marquee-left" id="product-marquee-inner">
+                    <!-- Product 1 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Toy" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZATNgzEzO52mPdFW7PM5iG-A4iTWoaI4KBCBTGBd3MZr6xV-n63hQm_w_CitVUUgS6Sefhu9yoJTXLgqNPkq0rMrCK5armtTwUGEpRZc7RVNTVihr0DLsUB6QC4R7BUEJ_fnc8ckzgvMXoPVk71tGHj-98vyft9jS6btla5F37hkngm1z2yBEN7zgANbIQbJmRNMW9swX4jm6kRoIK5Hsa7RhGlKKez2vj-Cp1cgE_F37OPeRPStUSSWUOUbVwKDSJVpJSYCbL9tb">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Squeaky Tennis Ball Dog Toy, Medium, 3 count</p>
+                        <p class="text-xl font-black mt-2 text-primary">$6.99</p>
+                        <div class="mt-2 text-[10px] text-text-muted flex items-center gap-1"><span
+                                class="bg-surface-container-high text-primary px-1 font-bold">New Customers Only</span>
+                        </div>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 2 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Dress" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOae_JmXv8UXDdx5bBTg38uAl6bCRrsHPyek3noW59Jxp0cX_q3iWul44ebscjZiS9qgVSuhbYi-bBAtmkYdnYxX3uru9m1wjkboHcFtQkQ1mTuoxXgpLKl3roJQcfVC8JQbd9Diooywoxu1420IELMmMC0zjHhSaeVNoRxrvJetGLn2Wb6_k43ytH6btcjM4OtJfqFOra4GJ22re7KnUU3M4KaRPMeejORCZOFRmFwChbnijIycd2QcZnRPqyd_9EQF0fOFpkJbwC">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Flag Ruffle Dog &amp; Cat Dress, X-Small</p>
+                        <p class="text-xl font-black mt-2 text-primary">$13.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 3 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Collar" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRH14_AShZm544VoezGsj0TXCExk9nkIoMiEK9AAvgSAIaK21HmrfLxJskxbbcL03pstOKPeseYCyVF7cB3tLhp7_p90PznYUUq8Pt5LWRX-nbuRx0qtF36ENgFmQ6GzwKa1HQyhi26ymATLfes06kTMB3sJmvVLR5Q-kfDol-I7e6KKXyPVmgqE3TIWYWGZ5PaXtkMD4mF2sHbKuV2mUOqxTk2tSrnibdEfRa5-hu7LPVDw24OBmx0Q9NPZ7bh-AwBrArl9H7Hy-0">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            American Flag Polyester Dog Collar, Large</p>
+                        <p class="text-xl font-black mt-2 text-primary">$10.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 4 (Duplicated for scroll) -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Toy" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZATNgzEzO52mPdFW7PM5iG-A4iTWoaI4KBCBTGBd3MZr6xV-n63hQm_w_CitVUUgS6Sefhu9yoJTXLgqNPkq0rMrCK5armtTwUGEpRZc7RVNTVihr0DLsUB6QC4R7BUEJ_fnc8ckzgvMXoPVk71tGHj-98vyft9jS6btla5F37hkngm1z2yBEN7zgANbIQbJmRNMW9swX4jm6kRoIK5Hsa7RhGlKKez2vj-Cp1cgE_F37OPeRPStUSSWUOUbVwKDSJVpJSYCbL9tb">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Squeaky Tennis Ball Dog Toy, Medium, 3 count</p>
+                        <p class="text-xl font-black mt-2 text-primary">$6.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+
+                    <!-- Product 1 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Toy" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZATNgzEzO52mPdFW7PM5iG-A4iTWoaI4KBCBTGBd3MZr6xV-n63hQm_w_CitVUUgS6Sefhu9yoJTXLgqNPkq0rMrCK5armtTwUGEpRZc7RVNTVihr0DLsUB6QC4R7BUEJ_fnc8ckzgvMXoPVk71tGHj-98vyft9jS6btla5F37hkngm1z2yBEN7zgANbIQbJmRNMW9swX4jm6kRoIK5Hsa7RhGlKKez2vj-Cp1cgE_F37OPeRPStUSSWUOUbVwKDSJVpJSYCbL9tb">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Squeaky Tennis Ball Dog Toy, Medium, 3 count</p>
+                        <p class="text-xl font-black mt-2 text-primary">$6.99</p>
+                        <div class="mt-2 text-[10px] text-text-muted flex items-center gap-1"><span
+                                class="bg-surface-container-high text-primary px-1 font-bold">New Customers Only</span>
+                        </div>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 2 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Dress" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOae_JmXv8UXDdx5bBTg38uAl6bCRrsHPyek3noW59Jxp0cX_q3iWul44ebscjZiS9qgVSuhbYi-bBAtmkYdnYxX3uru9m1wjkboHcFtQkQ1mTuoxXgpLKl3roJQcfVC8JQbd9Diooywoxu1420IELMmMC0zjHhSaeVNoRxrvJetGLn2Wb6_k43ytH6btcjM4OtJfqFOra4GJ22re7KnUU3M4KaRPMeejORCZOFRmFwChbnijIycd2QcZnRPqyd_9EQF0fOFpkJbwC">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Flag Ruffle Dog &amp; Cat Dress, X-Small</p>
+                        <p class="text-xl font-black mt-2 text-primary">$13.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 3 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Collar" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRH14_AShZm544VoezGsj0TXCExk9nkIoMiEK9AAvgSAIaK21HmrfLxJskxbbcL03pstOKPeseYCyVF7cB3tLhp7_p90PznYUUq8Pt5LWRX-nbuRx0qtF36ENgFmQ6GzwKa1HQyhi26ymATLfes06kTMB3sJmvVLR5Q-kfDol-I7e6KKXyPVmgqE3TIWYWGZ5PaXtkMD4mF2sHbKuV2mUOqxTk2tSrnibdEfRa5-hu7LPVDw24OBmx0Q9NPZ7bh-AwBrArl9H7Hy-0">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            American Flag Polyester Dog Collar, Large</p>
+                        <p class="text-xl font-black mt-2 text-primary">$10.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                    <!-- Product 4 (Duplicated for scroll) -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 relative group cursor-pointer shadow-sm hover:shadow-md transition w-64 flex-shrink-0">
+                        <span
+                            class="absolute top-2 left-2 bg-deal-yellow text-on-secondary-fixed text-[10px] font-black px-2 py-0.5 rounded uppercase">Deal</span>
+                        <img alt="Frisco Toy" class="w-full aspect-square object-contain mb-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZATNgzEzO52mPdFW7PM5iG-A4iTWoaI4KBCBTGBd3MZr6xV-n63hQm_w_CitVUUgS6Sefhu9yoJTXLgqNPkq0rMrCK5armtTwUGEpRZc7RVNTVihr0DLsUB6QC4R7BUEJ_fnc8ckzgvMXoPVk71tGHj-98vyft9jS6btla5F37hkngm1z2yBEN7zgANbIQbJmRNMW9swX4jm6kRoIK5Hsa7RhGlKKez2vj-Cp1cgE_F37OPeRPStUSSWUOUbVwKDSJVpJSYCbL9tb">
+                        <p class="text-xs font-bold leading-tight line-clamp-2"><span class="text-primary">Frisco</span>
+                            Americana Squeaky Tennis Ball Dog Toy, Medium, 3 count</p>
+                        <p class="text-xl font-black mt-2 text-primary">$6.99</p>
+                        <button
+                            class="mt-4 w-full bg-deal-yellow text-on-secondary-fixed rounded-full py-2 font-black text-sm hover:opacity-90 transition">Add
+                            to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: BlogSection -->
+    <!-- BEGIN: GoogleReviewsSection (Modified to Automatic Smooth Scroll Right) -->
+    <section class="max-w-7xl mx-auto px-4 py-12" data-purpose="google-reviews">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold font-headline-lg mb-2">Loved by Pet Parents</h2>
+            <div class="flex items-center justify-center gap-2">
+                <div class="flex text-deal-yellow">
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                </div>
+                <span class="font-bold text-on-surface-variant">4.9/5 based on 10,000+ Google reviews</span>
+            </div>
+        </div>
+        <div class="marquee-container" id="review-marquee">
+            <div class="marquee-content animate-marquee-right" id="review-marquee-inner">
+                <!-- Review 1 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8Clt-Lz_slu0Rsd2VYB7S1OEXkeCOniZVZVxgYgxFdVs-niuX7XMkQVm5bSqPIzVoPhMkOVfnUU5BpVnB-cB4U0IgvDZ_2ZeLrx-4S0gXtRiwy1zIlcpkvsPgnikBqqRIidvWb07G7DM-zMCU8iTIev7n_uxy0rJ58x5E3ERWjyGuMOWt7X5cAEp-z_T8y7YjERVuv1NLpfGW4Dv8NAscZfs_UNTTHpfywOZd7mRDQt2mJsvYKaRPO4XQSwU9y-TPJ_eoNHqFd7">
+                        <div>
+                            <p class="font-bold text-sm">Sarah Jenkins</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"PataMarket has the best selection of specialty
+                        diets for my senior cat. Fast delivery and the customer service is unmatched!"</p>
+                </div>
+                <!-- Review 2 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuApWXe3CE6MPYC_LmxYf06q3jIklVN7YdTKWjXoK1937gFXy3khlWAvZmH7ek0jEOuQE-YS93XQNxejiSDqGYwHwEh4gxjpmlBsGzcp-Bo_CVx02J8Xjfx9EpWq_aJloVIc_OKZS5KJqO0eZRj4PBaH7cVnXoBjTDrblvAMea2h3j2T1Sp1n3ZE-w3nA8Lb0r44huenGXB9--oefIas9I9eUcwEV_11DG5SSLFeyNEW8JkjJJOznCJwftYMnR5ZmdZ6WNVOUc_8bzO8">
+                        <div>
+                            <p class="font-bold text-sm">Michael R.</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"Autoship saved my life! I never worry about
+                        running out of puppy food anymore. Great prices too."</p>
+                </div>
+                <!-- Review 3 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGoZQhQFZ0ylG22jFhVwkRObq0ceuVl2OxXIAL_f-0ZAt8Plz6yu3l0pgMTvPK3EZ6MyjU5s1ERmMdYT92otpMZXpAwwiCPltnPnYWkSs7xeTc18uQ3qwz4umDN1f4GO4DDw1i5UaWk4ZdkrExDRNgpPnMLEuPbYLTHS_v1AxSJ4K_grNzw95ZZNsgWAcWymxJWb8N3oJM8E7wR_p0CrzPZPKLyydO--OVJv6obeCgQ4Nk1Ho0T5wxfV9sfQZyN0S4xuj_USN9pco4">
+                        <div>
+                            <p class="font-bold text-sm">Elena Gomez</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"The local store experts are so knowledgeable.
+                        They helped me find the right collar for my large breed dog."</p>
+                </div>
+
+                <!-- Review 1 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8Clt-Lz_slu0Rsd2VYB7S1OEXkeCOniZVZVxgYgxFdVs-niuX7XMkQVm5bSqPIzVoPhMkOVfnUU5BpVnB-cB4U0IgvDZ_2ZeLrx-4S0gXtRiwy1zIlcpkvsPgnikBqqRIidvWb07G7DM-zMCU8iTIev7n_uxy0rJ58x5E3ERWjyGuMOWt7X5cAEp-z_T8y7YjERVuv1NLpfGW4Dv8NAscZfs_UNTTHpfywOZd7mRDQt2mJsvYKaRPO4XQSwU9y-TPJ_eoNHqFd7">
+                        <div>
+                            <p class="font-bold text-sm">Sarah Jenkins</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"PataMarket has the best selection of specialty
+                        diets for my senior cat. Fast delivery and the customer service is unmatched!"</p>
+                </div>
+                <!-- Review 2 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuApWXe3CE6MPYC_LmxYf06q3jIklVN7YdTKWjXoK1937gFXy3khlWAvZmH7ek0jEOuQE-YS93XQNxejiSDqGYwHwEh4gxjpmlBsGzcp-Bo_CVx02J8Xjfx9EpWq_aJloVIc_OKZS5KJqO0eZRj4PBaH7cVnXoBjTDrblvAMea2h3j2T1Sp1n3ZE-w3nA8Lb0r44huenGXB9--oefIas9I9eUcwEV_11DG5SSLFeyNEW8JkjJJOznCJwftYMnR5ZmdZ6WNVOUc_8bzO8">
+                        <div>
+                            <p class="font-bold text-sm">Michael R.</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"Autoship saved my life! I never worry about
+                        running out of puppy food anymore. Great prices too."</p>
+                </div>
+                <!-- Review 3 -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant w-80 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img alt="User" class="w-10 h-10 rounded-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGoZQhQFZ0ylG22jFhVwkRObq0ceuVl2OxXIAL_f-0ZAt8Plz6yu3l0pgMTvPK3EZ6MyjU5s1ERmMdYT92otpMZXpAwwiCPltnPnYWkSs7xeTc18uQ3qwz4umDN1f4GO4DDw1i5UaWk4ZdkrExDRNgpPnMLEuPbYLTHS_v1AxSJ4K_grNzw95ZZNsgWAcWymxJWb8N3oJM8E7wR_p0CrzPZPKLyydO--OVJv6obeCgQ4Nk1Ho0T5wxfV9sfQZyN0S4xuj_USN9pco4">
+                        <div>
+                            <p class="font-bold text-sm">Elena Gomez</p>
+                            <div class="flex text-deal-yellow text-[12px]">
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-[14px] fill-current">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant italic">"The local store experts are so knowledgeable.
+                        They helped me find the right collar for my large breed dog."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: GoogleReviewsSection -->
+    <section class="max-w-7xl mx-auto px-4 py-8" data-purpose="blog-section">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold font-headline-lg">Comunidad PataMarket</h2>
+            <a class="text-primary font-bold text-sm flex items-center gap-1 hover:underline" href="#">View all articles
+                <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-outline-variant flex flex-col">
+                <div class="w-full h-48 bg-surface-container-high flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline-variant">image</span>
+                </div>
+                <div class="p-5 flex-grow">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Nutrition</span>
+                    <h3 class="text-lg font-bold mt-2 font-headline-md leading-snug">The Ultimate Guide to Puppy
+                        Nutrition</h3>
+                    <p class="text-sm text-on-surface-variant mt-2 line-clamp-2">Learn about the essential nutrients
+                        your growing pup needs for a healthy start in life.</p>
+                </div>
+                <div class="px-5 pb-5 mt-auto">
+                    <a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">Read More
+                        <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+                </div>
+            </div>
+            <div
+                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-outline-variant flex flex-col">
+                <div class="w-full h-48 bg-surface-container-high flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline-variant">image</span>
+                </div>
+                <div class="p-5 flex-grow">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Training</span>
+                    <h3 class="text-lg font-bold mt-2 font-headline-md leading-snug">5 Positive Reinforcement Training
+                        Tips</h3>
+                    <p class="text-sm text-on-surface-variant mt-2 line-clamp-2">Make training sessions fun and
+                        effective with these science-backed techniques for all pets.</p>
+                </div>
+                <div class="px-5 pb-5 mt-auto">
+                    <a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">Read More
+                        <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+                </div>
+            </div>
+            <div
+                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-outline-variant flex flex-col">
+                <div class="w-full h-48 bg-surface-container-high flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline-variant">image</span>
+                </div>
+                <div class="p-5 flex-grow">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Health</span>
+                    <h3 class="text-lg font-bold mt-2 font-headline-md leading-snug">Understanding Senior Pet Care Needs
+                    </h3>
+                    <p class="text-sm text-on-surface-variant mt-2 line-clamp-2">As your companions age, their
+                        requirements change. Here's how to provide the best care.</p>
+                </div>
+                <div class="px-5 pb-5 mt-auto">
+                    <a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">Read More
+                        <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- BEGIN: PopularCategories -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 font-headline-lg">Explore popular categories</h2>
+        <div class="grid grid-cols-3 md:grid-cols-6 gap-4 text-center">
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Dog Food" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0nRQo2Itlm9iJ5LPGtKKR2y6ZEX5MHQ3ozVWJvBI3UDnMQ5IoJiUR7lWUtAmvUgPfvlnLobvzbHsQawU70LFCgArULf69FMtVRijan3F-9kXPYV1ds5rqBZHDpApVGz97-9sW2zZeTEHoL5ryc9B466tAay7gicon5ro_YwHjhQmSaZVmncyu99IhPn7EYNXG6EKX_73wAMHBBDfDhPspQqdWqYCy0xmNywkuJy4xm-xW_8C52vOjjcdM7WXttc7RFY2tt5A30Gm2">
+                </div>
+                <p class="text-xs font-bold">Dog Food</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Flea &amp; Tick" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_w9kl6A8_P7kUabT-BJQBfrMHIJscwAl_V1ok3D0uGAEWdhYpR2ugXEN9X7xn8cCUKl2d5qTf566ORO-U35kO2DPK3zh_u2WmCMEm6fsEY1VGof0k4XZCOctTYuq_WNjrem2zliVhVla9OFXteSVkBwJzFPa2x3KEWPj5Ho1ezSUV5CkXJDK2jhSct9NjfgyPsIYUzlX-JgAnHVp1auzOvX8qUGLoP_xf2BIjSKHRKrY3XIW8D8kjPlyfegFvYHOQ0FCKL9AZoYhb">
+                </div>
+                <p class="text-xs font-bold">Dog Flea &amp; Tick</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Treats" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnt5C9OxB5GUMspJUG2BTsX_J8gJQ0WVRB2wLoBJm6NLCGBOE-broNemysAi90QtFJ24-NF1ob10plbFfzREVpycD2SwvbCeDnP7QEAzwhDvjUS_G7jrpSmbXBFx-fBl2eyqAm7aidoVEmIFDn7Z7iT0hPqLUfq64zzFG1A22POnaa2eggfyiQq_UtwFyHOcSDWS6lffqrtfkLzcHe9tTNULiW9JQBKnvCepR8ngnV06fdttgJVnU2mL4cscJC3tBLk3lUrK4D1WCn">
+                </div>
+                <p class="text-xs font-bold">Dog Treats</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Cat Food" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAox4SxeYXei6pHhA6NBp2KG5kLdg4kYwM9s3sbmkBU3sZ0TYcv76GbKu_B5aMptmFRMpqr0w-JUIwes82W-o_iSFV0Ij5uP_nNYqaldX6xmH5Uvj3A_HHDc9ZDFy1zOG6NW9GM5FR51bh78faMOyR7rI1HleC1jZ4xzFdnc1pzw0WsKwmWcqzwVE7NJVH6Ni0-VH66FsEZcRDVU3STR_40wODvg-vF0Mt3_FpUkdPdn2n7H89e5XCmOtx6fVd518MZm0hkxp77mbXW">
+                </div>
+                <p class="text-xs font-bold">Cat Food</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Cat Litter" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBU1Z-rPUP3hgkDMOAK0-LVoKTnfmT8hwAm1dKBBwoZt683Jd2POTf62HOvpEDe-g9rt95ti7VqcekdfmfXvHjB4YBR-ElPKY3I3_p94Erae-vsz9EYoB6Pram4qixMGEuxaxktDdkA7fwKOSBlT1hG0rWPNec21ayiIDUwbHVT5LZ4PsEWzGzUth6t09MgZKkhKFGeJBq9ISvSw-a-sUKOUIAcXwIumSitMZODxpbrQhs6zoSRDdhS__hrTMZ219Ylci-bHPeAj1Q">
+                </div>
+                <p class="text-xs font-bold">Cat Litter</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center mb-2 shadow-sm">
+                    <img alt="Deals" class="w-12 h-12 opacity-90"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJusUeH7yxuiwUvaYaEVp4rDsQAf-mDxREJ_GkdPjQkPGb0uDkX9ByApCTSw9-8nZw4XE2cFAJB_Y1fifUDA8j021RBdPfvQhIWc298a0E1KDOjyAYIb1CNU_RrVV4BWUJ1ASBvg_hNKONWpdFBBY82rLQOrEZ2g0etBV2wposCn18ltikf9MkR_pHSDsH7V1orMOQ8YNuANW6o4DakRVKlZVRmZ9d5ovamTtqoXwir-DzQqJjMaZN81-SwoWQWN6VpGPhTUk7Qhfa">
+                </div>
+                <p class="text-xs font-bold">Deals</p>
+            </div>
+        </div>
+    </section>
+    <!-- END: PopularCategories -->
+    <!-- BEGIN: PharmacySection -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <div
+            class="bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col md:flex-row border border-outline-variant shadow-sm">
+            <div class="relative md:w-1/2 h-64 md:h-auto">
+                <img alt="Chewy Pharmacy" class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc3Eey7I5gFQ7Zw_i_wHW7vXL1DJqnvKpzXKBVp3CFDibz467uK5VDRjbPPasYnzd-izAvSwe7oK-6xBOA_bNhaxORGXh5tGOTme3HaeQZq38ty6iYXo0a6uTdztZom3G-JkD_YxkL8dh49Hwa3el8ahmca0fEe-L7zW0NphnlvEmEMKRLzGSAELIUCWSjLo-omo4scAWmzY1R-YHTyoqZTVgqKg2KFAVZu8FBhnTlUPjTdbytyIWJwCYflLgHYkOObPaeVJ2fxSvd">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <button class="bg-primary bg-opacity-90 p-4 rounded-xl text-on-primary">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4.5 3.5v13L16 10 4.5 3.5z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                <h2 class="text-3xl font-bold mb-4 font-headline-lg text-primary">50% off your first pharmacy Autoship
+                    order</h2>
+                <p class="text-on-surface-variant mb-6 font-medium">Chewy Pharmacy has the pet meds you trust at low
+                    prices every day. We make the Rx process easy - our licensed pharmacists work with your vet to get
+                    your prescription approved, then we ship fast to your door.</p>
+                <button
+                    class="bg-surface-container-lowest border-2 border-primary text-primary font-bold px-8 py-2 rounded-full w-max hover:bg-primary-fixed transition">Shop
+                    now</button>
+            </div>
+        </div>
+    </section>
+    <!-- END: PharmacySection -->
+    <!-- BEGIN: PetParentingMadeEasy -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 font-headline-lg">Pet parenting made easy</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-center shadow-sm">
+                <img alt="App Support" class="mx-auto mb-4 h-40 object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2JxgiyOAofHUavVnKT7W2sjsusCJFPfA6v4aYKGFnUyQYuFQJkapCCV2Bfifi2enWL0XVJz9eWghe4md2qV7sOEI2Ztu2EVZoiszrF-9cqCOOtXREpyYir7qk7xCoMjCkWjagD8I5FrFFfhwDSrS2I65Y9UwKzKxRqF0qvl0URZayA1PEQYj5Np9-zkkvIMgEGZWzJ5VJXkIWc6keQ1-c3K29Dv8NEQ6RrTFuY_oEKXxAmwaN4QaKatSVo5xjxo9GL2_urL4EuD2F">
+                <p class="text-sm font-bold">Award-winning 24/7 customer care</p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-center shadow-sm">
+                <img alt="Vet Team" class="mx-auto mb-4 h-40 object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM0f2MYW939a-6LdiBV3mFC5GiyeED5IVsKwEGdIpS3cbvLK4SkcQ5HpF6uYcCo--_urDv8tNWJwDcb_pzXC6coSeBF1RG0YjxkzEfPduiYIBYCFwvF4SSZwS-SV33LHciVLtBBhIh6VE4TF2tJ9OShcEc2FSKJA6QBGwrS1FAcN4JiSTe48ByiQeXtoogUGy1O6bbivPLV2me6r9FjkzfTTj809JYCcWWW514VPQI3u7mJQGupIREwHhJN2f7Jj4cn2L2mcf3aj5O">
+                <p class="text-sm font-bold">Chat free with our licensed vet team</p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-center shadow-sm">
+                <img alt="Prescription meds" class="mx-auto mb-4 h-40 object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2H3o0A_bzwk3vMTRWaRFXI200d8QjfUThyLwREYMp2EF68Qjr6ZzoXy6kXvOTuBMRmnR4Rp_3vveTlQKtBIN7YtTnZnd0z5zR5sGrjppd8FnxAc8qiSXd06vuRdetkHYAr-orpj6M9RRNo0BK3UsAVCRaMv0OUiFcm55eP5wqKL1Ie9QLCoH4wiUjIDNjtZfHTXR20mQMScsV4LrHkFGG1gt0Qij8DXZQTWS46hNNXN6GrUi64QRtOokPxtlVWit7FWpVUW4m1AYO">
+                <p class="text-sm font-bold">Prescription meds, delivered fast</p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-center shadow-sm">
+                <img alt="Pet Insurance" class="mx-auto mb-4 h-40 object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsPzeVauLbfb6Tq91N1d-49L8os5bLHC4FARXIO66RLfidrP38XD-C7RfjpqlX9nATlZ2CMJC_rF0HEC3Ima2-ItUvPS6FhKoPwsSuD3OtAYPk59FReV4mqUCyJHjbaldIKsQtz3LJ8XLa99oEL5ufk2i0viPB1SYSBlex27Xuv2igdRImeKgwCHTU_hu2PWqQPmrq_mE5fKpWS-5yomhwMUBHYfhHalUjMqbgUieSiaakhIV0xr97nENnxXJa06oeO5Dx6yr11Faz">
+                <p class="text-sm font-bold">Discover pet insurance</p>
+            </div>
+        </div>
+    </section>
+    <!-- END: PetParentingMadeEasy -->
+    <!-- BEGIN: RoyalCaninBanner -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <div
+            class="bg-primary rounded-2xl overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 text-on-primary relative shadow-lg">
+            <div class="z-10 text-center md:text-left">
+                <h3 class="text-3xl font-bold mb-2 font-headline-lg">Support their health</h3>
+                <p class="mb-6 opacity-95 font-medium">With precise nutrition from Royal Canin.</p>
+                <button
+                    class="bg-surface-container-lowest text-primary px-8 py-3 rounded-full font-black shadow-md hover:bg-surface-container-high transition">Shop
+                    now</button>
+            </div>
+            <div class="flex gap-4 mt-8 md:mt-0">
+                <img alt="Product" class="h-40"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcUebKJJCG12cCv7QMnbLcTZ3eIV5PobiyXHJ1rrSCuJKXTqGOtJvT1duVTM3aEfnz39fD5NL0SGjrLpvUgCHbkF1hcx1wWDy5wAP-qSSXlq2RIwmq0V-QDMyCnnWjFiKap_gb6b4pjvMaQU_I5RPv8vs41is-7-lRp85_zdGK_rW09O54o5u0KQ0Q87wjiVlVZygPURE1j6nQtb2hpdmcUnjC8C7uGlKXTU3J7gWGAYByGVOjg38dpAI6C-RuWE3cqlDSdZea4GSH">
+                <img alt="Product" class="h-40"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlWN3MWNSbRHRFtWgseta0_mW9XBPmD0EfGFJUTKyV0Efyb5XZTgpWlDa31QFpKZK9x7Js-Hgcxpd90jKw0J_rwusGnM5E7VW2wMjdbjgIUhp6tS6GXHdRVb9ixTrX1iYcJVvtxjbV9Fr9p-LTXT27gi5Z9LzkKYlTz_WuneHRbWY4AlehlrohDaF9kX9xPlRpXPGG9WlQb1sjInXvavBEtb2hGbUTNHBX3QcDk0EOplPyo_AVpnGv3kJHU3V29dodoek-GoiZQ3uE">
+                <img alt="Pets" class="h-40 object-cover rounded-xl"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2i7zNGAiKSrmqWH_xa02UnQyo94NfYuFD7KUKocT7x9awX8WpaYqihaF8aKlQV2eWQ9zmuM8opHO247Ja-9S6nxtAmsEQh_Mp6DcSwJGGDp1OTsjrwx5TqYWSTEv7lzC3qMx1LLbsTLPHPzYjsUAS554jKbATOBU5NcBhnNK1JlYczzsN_dxDIRVEKdjbZhn4GZr5kKTLBkkqIepkQCleyxDkQqFtfo00zlEbkBL65Ld99d_yf52-D-vbXmgftm2g_zHlsAY9jKPG">
+            </div>
+        </div>
+    </section>
+    <!-- END: RoyalCaninBanner -->
+    <!-- BEGIN: UtilityFooter -->
+    <section class="max-w-7xl mx-auto px-4 py-8" data-purpose="store-locations">
+        <div class="bg-primary rounded-2xl p-8 text-on-primary shadow-lg">
+            <h2 class="text-2xl font-bold mb-8 font-headline-lg text-center">Nuestras Sucursales</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- Simplified sucursal list -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition border-4 border-deal-yellow">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold mt-2 opacity-90">Sucursal 1</span>
+                </div>
+                <!-- ... (Repeated sucursals) -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition border-4 border-deal-yellow">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold mt-2 opacity-90">Sucursal 2</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition border-4 border-deal-yellow">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold mt-2 opacity-90">Sucursal 3</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition border-4 border-deal-yellow">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold mt-2 opacity-90">Sucursal 4</span>
+                </div>
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition border-4 border-deal-yellow">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <span class="text-[10px] font-bold mt-2 opacity-90">Sucursal 5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-inverse-surface text-on-primary-fixed-variant mt-12" data-purpose="main-footer">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 items-center border-b border-outline">
+            <div class="flex items-center gap-4 py-4 justify-center md:justify-start">
+                <span class="text-xs font-bold opacity-80 uppercase tracking-widest">Our experts are available
+                    24/7:</span>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-8 justify-center">
+                <a class="flex items-center gap-2 font-bold text-xl text-on-primary" href="tel:18006724399">
+                    <svg class="w-6 h-6 text-primary-fixed" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
+                    </svg>
+                    1-800-672-4399
+                </a>
+                <a class="flex items-center gap-2 font-bold text-xl text-on-primary" href="#">
+                    <svg class="w-6 h-6 text-primary-fixed" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                    </svg>
+                    chat now
+                </a>
+            </div>
+            <div class="flex justify-center md:justify-end py-4">
+                <button
+                    class="bg-primary text-on-primary px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-opacity-90 transition"
+                    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"></path>
+                    </svg>
+                    Back to Top
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-wrap gap-4 text-xs font-medium opacity-80 justify-center">
+                <span class="">🇺🇸 United States</span>
+                <a class="hover:text-primary transition" href="#">About</a>
+                <a class="hover:text-primary transition" href="#">Help</a>
+                <a class="hover:text-primary transition" href="#">Give Back</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-inverse-surface hover:bg-primary transition"
+                    href="#">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-inverse-surface hover:bg-primary transition"
+                    href="#">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="bg-surface-container-highest py-6 text-[10px] text-on-surface-variant text-center uppercase font-bold"
+            data-purpose="copyright-bar">
+            <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-4">
+                <span class="">Copyright © 2024 Caregiver's Table by Chewy</span>
+                <a class="hover:text-primary" href="#">Terms of Use</a>
+                <a class="hover:text-primary" href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        /**
+         * Infinite Marquee Logic
+         * Ensures continuous scrolling by cloning items
+         */
+        function setupInfiniteMarquee(marqueeInnerId) {
+            const inner = document.getElementById(marqueeInnerId);
+            if (!inner) return;
+
+            // Clone content to create an infinite effect
+            const content = inner.innerHTML;
+            inner.innerHTML = content + content; // Duplicate items
+
+            // Check for reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                // Remove animation if motion is reduced
+                inner.classList.remove('animate-marquee-left', 'animate-marquee-right');
+                inner.style.overflowX = 'auto';
+            }
+        }
+
+        // Initialize carousels
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInfiniteMarquee('product-marquee-inner');
+            setupInfiniteMarquee('review-marquee-inner');
+        });
+    </script>
+
+
+</body>
+
+</html>
