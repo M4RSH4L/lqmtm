@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
+import KibbleScrollBackground from "@/components/KibbleScrollBackground";
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${hankenGrotesk.variable} bg-surface font-sans text-on-surface`}
       >
+        <KibbleScrollBackground />
         {children}
       </body>
     </html>
