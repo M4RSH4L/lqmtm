@@ -30,10 +30,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.variable} bg-surface font-sans text-on-surface relative`}
+        className={`${hankenGrotesk.variable} font-sans text-on-surface relative`}
       >
         <KibbleScrollBackground />
-        <div className="relative z-10">
+        <div className="relative z-10 bg-surface">
           {children}
         </div>
       </body>
